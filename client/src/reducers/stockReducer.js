@@ -7,6 +7,7 @@ const DEFAULT_STATE = {
 export default function ( state = DEFAULT_STATE, action){
     switch (action.type) {
         case types.STOCK_TICKER_RESULTS:
+        console.log('action payload', action.payload);
             return {...state, stockTickerArray: [...action.payload]};
         case types.CLEAR_STOCK_ARRAY:
             return{...state, stockTickerArray: []};

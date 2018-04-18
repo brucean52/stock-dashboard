@@ -19,103 +19,6 @@ import Paper from 'material-ui/Paper';
 import { MenuItem } from 'material-ui/Menu';
 import Chip from 'material-ui/Chip';
 
-
-const suggestions = [
-    { label: 'Afghanistan' },
-    { label: 'Aland Islands' },
-    { label: 'Albania' },
-    { label: 'Algeria' },
-    { label: 'American Samoa' },
-    { label: 'Andorra' },
-    { label: 'Angola' },
-    { label: 'Anguilla' },
-    { label: 'Antarctica' },
-    { label: 'Antigua and Barbuda' },
-    { label: 'Argentina' },
-    { label: 'Armenia' },
-    { label: 'Aruba' },
-    { label: 'Australia' },
-    { label: 'Austria' },
-    { label: 'Azerbaijan' },
-    { label: 'Bahamas' },
-    { label: 'Bahrain' },
-    { label: 'Bangladesh' },
-    { label: 'Barbados' },
-    { label: 'Belarus' },
-    { label: 'Belgium' },
-    { label: 'Belize' },
-    { label: 'Benin' },
-    { label: 'Bermuda' },
-    { label: 'Bhutan' },
-    { label: 'Bolivia, Plurinational State of' },
-    { label: 'Bonaire, Sint Eustatius and Saba' },
-    { label: 'Bosnia and Herzegovina' },
-    { label: 'Botswana' },
-    { label: 'Bouvet Island' },
-    { label: 'Brazil' },
-    { label: 'British Indian Ocean Territory' },
-    { label: 'Brunei Darussalam' },
-  ];
-  
-  function renderInput(inputProps) {
-    const { InputProps, classes, ref, ...other } = inputProps;
-  
-    return (
-      <TextField
-        InputProps={{
-          inputRef: ref,
-          classes: {
-            root: classes.inputRoot,
-          },
-          ...InputProps,
-        }}
-        {...other}
-      />
-    );
-  }
-  
-  function renderSuggestion({ suggestion, index, itemProps, highlightedIndex, selectedItem }) {
-    const isHighlighted = highlightedIndex === index;
-    const isSelected = (selectedItem || '').indexOf(suggestion.label) > -1;
-  
-    return (
-      <MenuItem
-        {...itemProps}
-        key={suggestion.label}
-        selected={isHighlighted}
-        component="div"
-        style={{
-          fontWeight: isSelected ? 500 : 400,
-        }}
-      >
-        {suggestion.label}
-      </MenuItem>
-    );
-  }
-  renderSuggestion.propTypes = {
-    highlightedIndex: PropTypes.number,
-    index: PropTypes.number,
-    itemProps: PropTypes.object,
-    selectedItem: PropTypes.string,
-    suggestion: PropTypes.shape({ label: PropTypes.string }).isRequired,
-  };
-  
-  function getSuggestions(inputValue) {
-    let count = 0;
-  
-    return suggestions.filter(suggestion => {
-      const keep =
-        (!inputValue || suggestion.label.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1) &&
-        count < 5;
-  
-      if (keep) {
-        count += 1;
-      }
-  
-      return keep;
-    });
-  }
-
 class Search extends Component{
     constructor(props){
         super(props);
@@ -123,37 +26,158 @@ class Search extends Component{
         this.state = {
             input: '',
             inputValue: '',
-            selectedItem: []
+            selectedItem: [],
+            suggestions: [
+              { label: 'Afghanistan' },
+              { label: 'Aland Islands' },
+              { label: 'Albania' },
+              { label: 'Algeria' },
+              { label: 'American Samoa' },
+              { label: 'Andorra' },
+              { label: 'Angola' },
+              { label: 'Anguilla' },
+              { label: 'Antarctica' },
+              { label: 'Antigua and Barbuda' },
+              { label: 'Argentina' },
+              { label: 'Armenia' },
+              { label: 'Aruba' },
+              { label: 'Australia' },
+              { label: 'Austria' },
+              { label: 'Azerbaijan' },
+              { label: 'Bahamas' },
+              { label: 'Bahrain' },
+              { label: 'Bangladesh' },
+              { label: 'Barbados' },
+              { label: 'Belarus' },
+              { label: 'Belgium' },
+              { label: 'Belize' },
+              { label: 'Benin' },
+              { label: 'Bermuda' },
+              { label: 'Bhutan' },
+              { label: 'Bolivia, Plurinational State of' },
+              { label: 'Bonaire, Sint Eustatius and Saba' },
+              { label: 'Bosnia and Herzegovina' },
+              { label: 'Botswana' },
+              { label: 'Bouvet Island' },
+              { label: 'Brazil' },
+              { label: 'British Indian Ocean Territory' },
+              { label: 'Brunei Darussalam' },
+            ]
         }
+    }
+    renderInput(inputProps) {
+      console.log('inputProps', inputProps);
+      const { InputProps, classes, ref, ...other } = inputProps;
+    
+      return (
+        <TextField
+          InputProps={{
+            inputRef: ref,
+            classes: {
+              root: classes.inputRoot,
+            },
+            ...InputProps,
+          }}
+          {...other}
+          onChange={this.handleChange}
+        />
+      );
+    }
+    
+    renderSuggestion({ item, index, itemProps, highlightedIndex, selectedItem }) {
+      const isHighlighted = highlightedIndex === index;
+      const isSelected = (selectedItem || '').indexOf(item.Value) > -1;
+    
+      return (
+        <MenuItem
+          {...itemProps}
+          key={index}
+          selected={isHighlighted}
+          component="div"
+          style={{
+            fontWeight: isSelected ? 500 : 400,
+          }}
+        >
+          {item.Text}
+        </MenuItem>
+      );
+    }
+    
+    handleChange = event =>{
+        
+        console.log('event.target.value ', event.target.value);
+        if(event.target.value){
+            this.props.getStockTickerResults(event.target.value);
+        } else {
+            this.props.clearStockTickerArray();
+        }
+        this.setState({ input: event.target.value });
+    };
+    
+    getSuggestions(inputValue) {
+      //let count = 0;
+      //console.log('input value', inputValue); 
+      // if(inputValue){
+      //     this.props.getStockTickerResults(inputValue);
+      // } else {
+      //     this.props.clearStockTickerArray();
+      // }
+      return this.state.suggestions;
+      // return suggestions.filter(suggestion => {
+      //   const keep =
+      //     (!inputValue || suggestion.label.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1) &&
+      //     count < 5;
+    
+      //   if (keep) {
+      //     count += 1;
+      //   }
+    
+      //   return keep;
+      // });
     }
 
     render() {
         const { classes } = this.props;
+        console.log('search props', this.props);
+        let suggestionMap =  this.props.stockTickerArr.map((item, index) => {
+                                                  console.log('item', item);
+                                                  return (
+                                                    <MenuItem key={item.index}>
+                                                    {item.Value}
+                                                    {/* {item.Text} */}
+                                                  </MenuItem>
+                                                  );
+                              });
+
 
         return (
             <div className={classes.root}>
             <Downshift>
                 {({ getInputProps, getItemProps, isOpen, inputValue, selectedItem, highlightedIndex }) => (
                 <div className={classes.container}>
-                    {renderInput({
+                    {this.renderInput({
                     fullWidth: true,
                     classes,
                     InputProps: getInputProps({
-                        placeholder: 'Search a country (start with a)',
+                        placeholder: 'Enter Stock Symbol',
                         id: 'integration-downshift-simple',
+                        onChange: this.handleChange,
                     }),
                     })}
                     {isOpen ? (
                     <Paper className={classes.paper} square>
-                        {getSuggestions(inputValue).map((suggestion, index) =>
-                        renderSuggestion({
-                            suggestion,
-                            index,
-                            itemProps: getItemProps({ item: suggestion.label }),
-                            highlightedIndex,
-                            selectedItem,
-                        }),
-                        )}
+                      {suggestionMap}
+                        {/* {this.props.stockTickerArr.map((item, index) => {
+                                                  console.log('item', item);
+                                                  this.renderSuggestion({
+                                                      item,
+                                                      index,
+                                                      itemProps: getItemProps({ item: item.Value }),
+                                                      highlightedIndex,
+                                                      selectedItem,
+                                                  })
+                        }
+                        )} */}
                     </Paper>
                     ) : null}
                 </div>
@@ -166,6 +190,11 @@ class Search extends Component{
     
     Search.propTypes = {
       classes: PropTypes.object.isRequired,
+      highlightedIndex: PropTypes.number,
+      index: PropTypes.number,
+      itemProps: PropTypes.object,
+      selectedItem: PropTypes.string,
+      //suggestion: PropTypes.shape({ label: PropTypes.string }).isRequired,
     };
     
     const styles = theme => ({
@@ -192,9 +221,9 @@ class Search extends Component{
       },
     });
     
-    Search.propTypes = {
-      classes: PropTypes.object.isRequired,
-    };
+    // Search.propTypes = {
+    //   classes: PropTypes.object.isRequired,
+    // };
     // handleChange = event => {
     //     this.setState({ input: event.target.value });
     //     //console.log('event.target.value ',event.target.value);

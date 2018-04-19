@@ -21,6 +21,13 @@ export function getStockTickerResults(input){
       };
 }
 
+export function setStock(symbol){
+  return{
+    type: types.SET_STOCK_SYMBOL,
+    payload: symbol
+  }
+}
+
 export function clearStockTickerArray(){
     return {
         type: types.CLEAR_STOCK_ARRAY

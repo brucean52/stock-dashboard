@@ -4,8 +4,7 @@ import types from './types';
 export function getStockTickerResults(input){
     return dispatch => {
         const URL = 'http://search.xignite.com/Search/Suggest?parameter=XigniteGlobalQuotes.GetGlobalDelayedQuote.Identifier&term='
-        const response = axios
-            .get(URL+input)
+        axios.get(URL+input)
           .then(resp => {
             dispatch({
               type: types.STOCK_TICKER_RESULTS,
@@ -22,10 +21,28 @@ export function getStockTickerResults(input){
 }
 
 export function setStock(symbol){
-  return{
-    type: types.SET_STOCK_SYMBOL,
-    payload: symbol
-  }
+  return dispatch => {
+    const URL = 'https://api.iextrading.com/1.0/stock/'+symbol+'/batch?types=quote,news,stats,chart&range=1m&last=10';
+    axios.get(URL)
+      .then(resp => {
+        console.log(resp);
+        dispatch({
+          type: types.GET_STOCK_DATA,
+          payload: resp.data
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: types.AXIOS_ERROR,
+          msg: 'Failed to get stock ticker results:' + err
+        });
+      });
+  };
+
+  // return{
+  //   type: types.SET_STOCK_SYMBOL,
+  //   payload: symbol
+  // }
 }
 
 export function clearStockTickerArray(){

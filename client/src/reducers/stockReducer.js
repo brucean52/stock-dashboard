@@ -11,7 +11,7 @@ export default function ( state = DEFAULT_STATE, action){
             return {...state, stockTickerArray: [...action.payload]};
         case types.CLEAR_STOCK_ARRAY:
             return {...state, stockTickerArray: []};
-        case types.SET_STOCK_SYMBOL:
+        case types.GET_STOCK_DATA:
             console.log('action payload', action.payload);
             return {...state, stockSymbol: action.payload}
         default:

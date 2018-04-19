@@ -25,7 +25,6 @@ export function setStock(symbol){
     const URL = 'https://api.iextrading.com/1.0/stock/'+symbol+'/batch?types=quote,news,stats,chart&range=1m&last=10';
     axios.get(URL)
       .then(resp => {
-        console.log(resp);
         dispatch({
           type: types.GET_STOCK_DATA,
           payload: resp.data
@@ -34,15 +33,10 @@ export function setStock(symbol){
       .catch(err => {
         dispatch({
           type: types.AXIOS_ERROR,
-          msg: 'Failed to get stock ticker results:' + err
+          msg: 'Failed to get stock data results:' + err
         });
       });
   };
-
-  // return{
-  //   type: types.SET_STOCK_SYMBOL,
-  //   payload: symbol
-  // }
 }
 
 export function clearStockTickerArray(){

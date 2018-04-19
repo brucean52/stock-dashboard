@@ -150,7 +150,8 @@ class Search extends Component{
 
 function mapStateToProps(state){
     return {
-        stockTickerArr: state.stock.stockTickerArray
+        stockTickerArr: state.stock.stockTickerArray,
+        stockNews: state.stock.stockNews
     }
 }
 

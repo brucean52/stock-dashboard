@@ -79,7 +79,7 @@ class Search extends Component{
             ...InputProps,
           }}
           {...other}
-          onChange={this.handleChange}
+          //onChange={this.handleChange}
         />
       );
     }
@@ -140,9 +140,9 @@ class Search extends Component{
         const { classes } = this.props;
         console.log('search props', this.props);
         let suggestionMap =  this.props.stockTickerArr.map((item, index) => {
-                                                  console.log('item', item);
+                                                  //console.log('item', item);
                                                   return (
-                                                    <MenuItem key={item.index}>
+                                                    <MenuItem key={index}>
                                                     {item.Value}
                                                     {/* {item.Text} */}
                                                   </MenuItem>

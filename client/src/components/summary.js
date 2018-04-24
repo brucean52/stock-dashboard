@@ -18,9 +18,9 @@ const styles = theme => ({
 });
 
 let id = 0;
-function createData(name, calories, fat, carbs, protein) {
+function createData(column_1, column_2, column_3, column_4) {
   id += 1;
-  return { id, name, calories, fat, carbs, protein };
+  return { id, column_1, column_2, column_3, column_4 };
 }
 
 const data = [
@@ -39,16 +39,16 @@ const Summary = props => {
     const { classes } = props;
     return (
         <Paper className={classes.root}>
+        <h3>Stock Name</h3>
         <Table className={classes.table}>
           <TableBody>
             {data.map(n => {
               return (
                 <TableRow key={n.id}>
-                  <TableCell>{n.name}</TableCell>
-                  <TableCell numeric>{n.calories}</TableCell>
-                  <TableCell numeric>{n.fat}</TableCell>
-                  <TableCell numeric>{n.carbs}</TableCell>
-                  <TableCell numeric>{n.protein}</TableCell>
+                  <TableCell>{n.column_1}</TableCell>
+                  <TableCell numeric>{n.column_2}</TableCell>
+                  <TableCell numeric>{n.column_3}</TableCell>
+                  <TableCell numeric>{n.column_4}</TableCell>
                 </TableRow>
               );
             })}

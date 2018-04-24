@@ -28,7 +28,7 @@ const News = props => {
           </Typography>
           <Typography component="p">
             Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            species, ranging across all continencts except Antarctica
           </Typography>
         </CardContent>
         <CardActions>

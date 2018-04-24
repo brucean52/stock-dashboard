@@ -23,23 +23,34 @@ function createData(column_1, column_2, column_3, column_4) {
   return { id, column_1, column_2, column_3, column_4 };
 }
 
-const data = [
-  createData('Previous Close', 159, 'Market Cap', 24),
-  createData('Open', 237, 'Beta', 37),
-  createData("Day's Range", 262, 'P/E Ratio (ttm)', 24),
-  createData('52 Week Range', 305, 'EPS (ttm)', 67),
-  createData("Dividend/Yield", 356, "ex-Dividend Date", 49),
-  createData("Volume", 356, "YTD Change", 49),
-  createData("50 Day Moving Average", 356, "200 Day Moving Average", 49),
-  createData("Short Interest", 356, "Short Ratio", 49),
-];
+// const data = [
+//   createData('Previous Close', 159, 'Market Cap', 24),
+//   createData('Open', 237, 'Beta', 37),
+//   createData("Day's Range", 262, 'P/E Ratio (ttm)', 24),
+//   createData('52 Week Range', 305, 'EPS (ttm)', 67),
+//   createData("Dividend/Yield", 356, "ex-Dividend Date", 49),
+//   createData("Volume", 356, "YTD Change", 49),
+//   createData("50 Day Moving Average", 356, "200 Day Moving Average", 49),
+//   createData("Short Interest", 356, "Short Ratio", 49),
+// ];
 
 const Summary = props => {
     console.log('summary props', props);
     const { classes } = props;
+    let data = [
+      createData('Previous Close', props.stockQuote.close, 'Market Cap', props.stockQuote.marketCap),
+      createData('Open', props.stockQuote.open, 'Beta', props.stockStats.beta),
+      createData("Day's Range", 262, 'P/E Ratio (ttm)', props.stockQuote.peRatio),
+      createData('52 Week Range', 305, 'EPS (ttm)', props.stockStats.ttmEPS),
+      createData("Dividend/Yield", props.stockStats.dividendRate, "ex-Dividend Date", props.stockStats.exDividendDate),
+      createData("Volume", props.stockQuote.latestVolume, "YTD Change", props.stockQuote.ytdChange),
+      createData("50 Day Moving Average", props.stockStats.day50MovingAvg, "200 Day Moving Average", props.stockStats.day200MovingAvg),
+      createData("Short Interest", props.stockStats.shortInterest, "Short Ratio", props.stockStats.shortRatio),
+    ];
     return (
         <Paper className={classes.root}>
-        <h3>Stock Name</h3>
+        <h3>{props.stockQuote.symbol} {props.stockQuote.calculationPrice} {props.stockQuote.change}  ({props.stockQuote.changePercent}%)</h3>
+        <h5>{props.stockQuote.companyName}</h5>
         <Table className={classes.table}>
           <TableBody>
             {data.map(n => {

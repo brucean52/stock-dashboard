@@ -24,11 +24,14 @@ function createData(name, calories, fat, carbs, protein) {
 }
 
 const data = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
+  createData('Previous Close', 159, 'Market Cap', 24),
+  createData('Open', 237, 'Beta', 37),
+  createData("Day's Range", 262, 'P/E Ratio (ttm)', 24),
+  createData('52 Week Range', 305, 'EPS (ttm)', 67),
+  createData("Dividend/Yield", 356, "ex-Dividend Date", 49),
+  createData("Volume", 356, "YTD Change", 49),
+  createData("50 Day Moving Average", 356, "200 Day Moving Average", 49),
+  createData("Short Interest", 356, "Short Ratio", 49),
 ];
 
 const Summary = props => {

@@ -37,6 +37,12 @@ function createData(column_1, column_2, column_3, column_4) {
 const Summary = props => {
     console.log('summary props', props);
     const { classes } = props;
+    let stockQuote = '';
+    if(props.stockQuote.calculationPrice === "close"){
+      stockQuote = props.stockQuote.close;
+    } else {
+      stockQuote = props.stockQuote.calculationPrice;
+    }
     let data = [
       createData('Previous Close', props.stockQuote.close, 'Market Cap', props.stockQuote.marketCap),
       createData('Open', props.stockQuote.open, 'Beta', props.stockStats.beta),
@@ -49,7 +55,7 @@ const Summary = props => {
     ];
     return (
         <Paper className={classes.root}>
-        <h3>{props.stockQuote.symbol} {props.stockQuote.calculationPrice} {props.stockQuote.change}  ({props.stockQuote.changePercent}%)</h3>
+        <h3>{props.stockQuote.symbol} {stockQuote} {props.stockQuote.change}  ({props.stockQuote.changePercent}%)</h3>
         <h5>{props.stockQuote.companyName}</h5>
         <Table className={classes.table}>
           <TableBody>

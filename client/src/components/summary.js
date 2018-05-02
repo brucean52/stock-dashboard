@@ -8,7 +8,7 @@ import Paper from 'material-ui/Paper';
 
 const styles = theme => ({
   root: {
-    width: '100%',
+    width: '50%',
     marginTop: theme.spacing.unit * 3,
     overflowX: 'auto',
   },

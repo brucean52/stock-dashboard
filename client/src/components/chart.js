@@ -1,6 +1,16 @@
 import React from 'react';
 import ChartistGraph from 'react-chartist';
+import Paper from 'material-ui/Paper';
+import { withStyles } from "material-ui/styles";
+import compose from 'recompose/compose';
 import { connect } from 'react-redux';
+
+const styles = theme => ({
+    root: {
+      width: '50%',
+      marginTop: theme.spacing.unit * 3,
+    },
+  });
 
 var data = {
     labels: ['W1', 'W2', 'W3', 'W4', 'W5', 'W6', 'W7', 'W8', 'W9', 'W10'],
@@ -23,10 +33,11 @@ var data = {
 
 const Chart = props => {
     console.log('chart props', props);
+    const { classes } = props;
     return(
-        <div>
-            <ChartistGraph data={data} options={options} type={type} />
-        </div>
+        <Paper className={classes.root}>
+            <ChartistGraph data={data} options={options} type={type} /> 
+        </Paper>
     );
 }
 
@@ -36,4 +47,7 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, {})(Chart);
+export default compose(
+    withStyles(styles),
+    connect(mapStateToProps, {})
+)(Chart);

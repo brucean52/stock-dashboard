@@ -127,7 +127,7 @@ class Search extends Component{
     const styles = theme => ({
       root: {
         flexGrow: 1,
-        height: 250,
+        //height: 250,
       },
       container: {
         flexGrow: 1,

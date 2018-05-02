@@ -19,7 +19,7 @@ const styles = {
 
 const News = props => {
   const { classes } = props;
-  console.log('news props', props);
+  //console.log('news props', props);
   let newsCards = props.stockNews.map((item, index)=>{
     //console.log('news item', item);
     return (

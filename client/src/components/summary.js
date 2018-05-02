@@ -43,11 +43,21 @@ const Summary = props => {
     } else {
       stockQuote = props.stockQuote.calculationPrice;
     }
+    let fiftyTwoWeekRange = '';
+
+    if(props.stockStats.hasOwnProperty('week52low')){
+      fiftyTwoWeekRange = props.stockStats.week52low.toString()+' - '+props.stockStats.week52high.toString();
+    }
+
+    let dayRange = '';
+    if(props.stockQuote.hasOwnProperty('high')){
+      dayRange = props.stockQuote.low.toString()+' - '+props.stockQuote.high.toString();
+    }
     let data = [
       createData('Previous Close', props.stockQuote.close, 'Market Cap', props.stockQuote.marketCap),
       createData('Open', props.stockQuote.open, 'Beta', props.stockStats.beta),
-      createData("Day's Range", 262, 'P/E Ratio (ttm)', props.stockQuote.peRatio),
-      createData('52 Week Range', 305, 'EPS (ttm)', props.stockStats.ttmEPS),
+      createData("Day's Range", dayRange, 'P/E Ratio (ttm)', props.stockQuote.peRatio),
+      createData('52 Week Range', fiftyTwoWeekRange, 'EPS (ttm)', props.stockStats.ttmEPS),
       createData("Dividend/Yield", props.stockStats.dividendRate, "ex-Dividend Date", props.stockStats.exDividendDate),
       createData("Volume", props.stockQuote.latestVolume, "YTD Change", props.stockQuote.ytdChange),
       createData("50 Day Moving Average", props.stockStats.day50MovingAvg, "200 Day Moving Average", props.stockStats.day200MovingAvg),

@@ -22,6 +22,7 @@ var data = {
   var type = 'Line';
 
 const Chart = props => {
+    console.log('chart props', props);
     return(
         <div>
             <ChartistGraph data={data} options={options} type={type} />

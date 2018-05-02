@@ -19,27 +19,33 @@ const styles = {
 
 const News = props => {
   const { classes } = props;
+  console.log('news props', props);
+  let newsCards = props.stockNews.map((item, index)=>{
+    //console.log('news item', item);
+    return (
+      <Card className={classes.card} key={index}>
+      <CardContent>
+        <Typography gutterBottom variant="headline" component="h2">
+          {item.headline}
+        </Typography>
+        <Typography component="p">
+          {item.summary}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small" color="primary">
+          Share
+        </Button>
+        <Button size="small" color="primary">
+          Learn More
+        </Button>
+      </CardActions>
+    </Card>
+    );
+  });
   return (
     <div>
-      <Card className={classes.card}>
-        <CardContent>
-          <Typography gutterBottom variant="headline" component="h2">
-            Lizard
-          </Typography>
-          <Typography component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continencts except Antarctica
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small" color="primary">
-            Share
-          </Button>
-          <Button size="small" color="primary">
-            Learn More
-          </Button>
-        </CardActions>
-      </Card>
+      {newsCards}
     </div>
   );
 }

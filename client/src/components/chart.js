@@ -19,16 +19,16 @@ var data = {
     ]
   };
 
-  var options = {
-    high: 10,
-    low: 0,
-    showArea: true,
-    axisX: {
-      labelInterpolationFnc: function(value, index) {
-        return index % 2 === 0 ? value : null;
-      }
-    }
-  };
+  // var options = {
+  //   high: 10,
+  //   low: 0,
+  //   showArea: true,
+  //   axisX: {
+  //     labelInterpolationFnc: function(value, index) {
+  //       return index % 2 === 0 ? value : null;
+  //     }
+  //   }
+  // };
 
   var type = 'Line';
 

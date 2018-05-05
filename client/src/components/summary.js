@@ -35,7 +35,7 @@ function createData(column_1, column_2, column_3, column_4) {
 // ];
 
 const Summary = props => {
-    console.log('summary props', props);
+    //console.log('summary props', props);
     const { classes } = props;
     let stockQuote = '';
     if(props.stockQuote.calculationPrice === "close"){

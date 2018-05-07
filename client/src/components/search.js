@@ -31,7 +31,7 @@ class Search extends Component{
         }
     }
     renderInput(inputProps) {
-      //console.log('inputProps', inputProps);
+      console.log('inputProps', inputProps);
       const { InputProps, classes, ref, ...other } = inputProps;
     
       return (
